@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>姚老师的博客</title>
+  <title>云图</title>
   
-  <subtitle>啦啦啦啦啦</subtitle>
+  <subtitle>那些未完成的梦</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyue47.github.io/"/>
@@ -10,7 +10,7 @@
   <id>https://yaoyue47.github.io/</id>
   
   <author>
-    <name>John Doe</name>
+    <name>姚越</name>
     
   </author>
   

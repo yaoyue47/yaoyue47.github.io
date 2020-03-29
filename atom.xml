@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyue47.github.io/"/>
-  <updated>2020-03-28T07:47:52.321Z</updated>
+  <updated>2020-03-29T14:25:38.848Z</updated>
   <id>https://yaoyue47.github.io/</id>
   
   <author>
@@ -17,25 +17,28 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>fristdoc</title>
-    <link href="https://yaoyue47.github.io/2020/03/28/fristdoc/"/>
-    <id>https://yaoyue47.github.io/2020/03/28/fristdoc/</id>
-    <published>2020-03-28T07:45:53.000Z</published>
-    <updated>2020-03-28T07:47:52.321Z</updated>
+    <title>写在最前</title>
+    <link href="https://yaoyue47.github.io/2020/03/29/%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D/"/>
+    <id>https://yaoyue47.github.io/2020/03/29/%E5%86%99%E5%9C%A8%E6%9C%80%E5%89%8D/</id>
+    <published>2020-03-29T14:12:40.000Z</published>
+    <updated>2020-03-29T14:25:38.848Z</updated>
     
-    <content type="html"><![CDATA[<p>啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊发哇发表你看骄傲比我爱克发吧款哈弗</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><h3 id="写在最前"><a href="#写在最前" class="headerlink" title="写在最前"></a>写在最前</h3></blockquote><p>一直以来只有写微信公众号时会拿起记事本来写东西，可惜已经好久没写了，这次打算开一个技术博客吧，也算记录自己的成长之路，也算当作自己的代码备忘。</p><p>最近这段时间很迷茫，一直在考研和工作之间犹豫徘徊，不知道我能不能成为一名真正的程序员。</p><p>很难得由这么空闲的时间，这么漫长的假期，我一边准备的考试，一边拓展的自己的能力库。也是最近学了git后才想把自己做的很久的梦完成。</p><p>我很久之前看到过别人的<a href="https://github.com/Huxpro/huxpro.github.io" target="_blank" rel="noopener">博客</a>，做的很漂亮，所以就在心里埋了一个种子。虽然模板是别人的，托管是github的，但是好歹里里面的内容是自己的。以后看到会很有感触吧。</p><p>不写随笔很多年，以后应该都是技术文章了，第一篇文章写于2020年3月27日，<strong>写给自己的梦</strong>。</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊发哇发表你看骄傲比我爱克发吧款哈弗&lt;/p&gt;
-
+        &lt;blockquote&gt;
+&lt;h3 id=&quot;写在最前&quot;&gt;&lt;a href=&quot;#写在最前&quot; class=&quot;headerlink&quot; title=&quot;写在最前&quot;&gt;&lt;/a&gt;写在最前&lt;/h3&gt;&lt;/blockquote&gt;
+&lt;p&gt;一直以来只有写微信公众号时会拿起记事本来写东西，可惜已经好久没写了，这
       
     
     </summary>
     
     
+    
+      <category term="随笔" scheme="https://yaoyue47.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   

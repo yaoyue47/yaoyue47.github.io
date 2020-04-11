@@ -13,11 +13,11 @@
 
     <title>
         
-          各种ajax的请求姿势 - undefined
+          学习django的第二天 - undefined
         
     </title>
 
-    <link rel="canonical" href="https://yaoyue47.github.io/2020/03/29/各种ajax的请求姿势/">
+    <link rel="canonical" href="https://yaoyue47.github.io/2020/04/11/学习django第二天/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -169,14 +169,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#前端请求" title="前端请求">前端请求</a>
+                          <a class="tag" href="/tags/#django" title="django">django</a>
                         
                     </div>
-                    <h1>各种ajax的请求姿势</h1>
+                    <h1>学习django的第二天</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 姚越 on
-                        2020-03-29
+                        2020-04-11
                     </span>
                 </div>
             </div>
@@ -195,30 +195,10 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <blockquote>
-<h3 id="关于各种ajax发送post，get请求的姿势"><a href="#关于各种ajax发送post，get请求的姿势" class="headerlink" title="关于各种ajax发送post，get请求的姿势"></a>关于各种ajax发送post，get请求的姿势</h3></blockquote>
-<ul>
-<li><p>jQuery封装的请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$.post(<span class="string">"/try/ajax/demo_test_post.php"</span>,&#123;</span><br><span class="line">			name:<span class="string">"菜鸟教程"</span>,</span><br><span class="line">			url:<span class="string">"http://www.runoob.com"</span></span><br><span class="line">		&#125;,</span><br><span class="line">		<span class="function"><span class="keyword">function</span>(<span class="params">data,status</span>)</span>&#123;</span><br><span class="line">			alert(<span class="string">"数据: \n"</span> + data + <span class="string">"\n状态: "</span> + status);</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-<hr>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$.<span class="keyword">get</span>("/try/ajax/demo_test.php",function(data,status)&#123;</span><br><span class="line">			alert(<span class="string">"数据: "</span> + data + <span class="string">"\n状态: "</span> + status);</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>ajax原生请求</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">    	url:<span class="string">"http://www.microsoft.com"</span>,    <span class="comment">//请求的url地址</span></span><br><span class="line">   		dataType:<span class="string">"json"</span>,   <span class="comment">//返回格式为json</span></span><br><span class="line">  		<span class="keyword">async</span>:<span class="literal">true</span>,<span class="comment">//请求是否异步，默认为异步，这也是ajax重要特性</span></span><br><span class="line">    	data:&#123;<span class="string">"id"</span>:<span class="string">"value"</span>&#125;,    <span class="comment">//参数值</span></span><br><span class="line">   		type:<span class="string">"POST"</span>,   <span class="comment">//请求方式</span></span><br><span class="line">  		beforeSend:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   		     <span class="comment">//请求前的处理</span></span><br><span class="line">  		&#125;,</span><br><span class="line">    	success:<span class="function"><span class="keyword">function</span>(<span class="params">req</span>)</span>&#123;</span><br><span class="line">    		    <span class="comment">//请求成功时处理</span></span><br><span class="line">    	&#125;,</span><br><span class="line">   		complete:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    		    <span class="comment">//请求完成的处理</span></span><br><span class="line">   		&#125;,</span><br><span class="line">   		error:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     		   <span class="comment">//请求出错处理</span></span><br><span class="line">    	&#125;</span><br><span class="line">		&#125;);</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<blockquote>
-<p>注：post请求体中也还有不同的格式。待续。。</p>
-</blockquote>
+                <h1 id="关于respond"><a href="#关于respond" class="headerlink" title="关于respond"></a>关于respond</h1><p>#todo</p>
+<h1 id="关于-request"><a href="#关于-request" class="headerlink" title="关于 request"></a>关于 request</h1><p>#todo</p>
+<h1 id="关于-cookie和session"><a href="#关于-cookie和session" class="headerlink" title="关于 cookie和session"></a>关于 cookie和session</h1><p>#todo</p>
+<h1 id="关于序列化"><a href="#关于序列化" class="headerlink" title="关于序列化"></a>关于序列化</h1><p>#todo</p>
 
 
                 <hr>
@@ -227,13 +207,9 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/04/07/学习django第一天/" data-toggle="tooltip" data-placement="top" title="学习django第一天">&larr; Previous Post</a>
-                        </li>
-                    
                     
                         <li class="next">
-                            <a href="/2020/03/29/post和get的区别/" data-toggle="tooltip" data-placement="top" title="post和get的区别">Next Post &rarr;</a>
+                            <a href="/2020/04/07/学习django第一天/" data-toggle="tooltip" data-placement="top" title="学习django第一天">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -260,7 +236,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#前端请求" title="前端请求">前端请求</a>
+                          <a class="tag" href="/tags/#django" title="django">django</a>
                         
                     </div>
                 </section>

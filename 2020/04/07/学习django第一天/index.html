@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -238,6 +238,7 @@
 <h3 id="views-py-文件备注"><a href="#views-py-文件备注" class="headerlink" title="views.py 文件备注"></a>views.py 文件备注</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">index</span><span class="params">(request)</span>:</span></span><br><span class="line">    </span><br><span class="line">    selected_choice = question.choice_set.get(pk=request.POST[<span class="string">'choice'</span>])</span><br><span class="line">    <span class="comment"># request.POST['choice']获取request中的post传来的字典对象 值永远为字符串</span></span><br><span class="line">    <span class="comment"># request.GET['choice'] 同理</span></span><br><span class="line">    </span><br><span class="line">    question = get_object_or_404(Question, pk=question_id) </span><br><span class="line">    <span class="comment"># get_object_or_404()快捷方式，，用来代替get()如果查询不到会自动弹出404错误 get_list_or_404()用来代替filter()</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="comment">#...</span></span><br></pre></td></tr></table></figure>
 
 <p>当路由匹配时会执行相应函数</p>
+<p>无论如何views.py中的函数会接受<code>request</code>对象，处理后返回一个<code>HttpResponse</code>类的对象，<code>HttpResponse</code>里面的参数就是返回给浏览器显示的内容</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> HttpResponse(<span class="string">"Hello, world. You're at the polls index."</span>) <span class="comment"># 返回方式1</span></span><br><span class="line"><span class="keyword">return</span> HttpResponse(template.render(context, request)) <span class="comment"># 返回方式2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> render(request, <span class="string">'polls/index.html'</span>, context) <span class="comment">#第二种的快捷方式 常用</span></span><br></pre></td></tr></table></figure>
 
 <p>render()需要三个参数：</p>
@@ -257,9 +258,37 @@
 <li>url的命名</li>
 <li>arg：传给url的值</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">"res"</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>返回json格式的参数，函数内需要一个字典</p>
 <h3 id="model-py-文件备注"><a href="#model-py-文件备注" class="headerlink" title="model.py 文件备注"></a>model.py 文件备注</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    pub_date = models.DateTimeField(<span class="string">'date published'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.question_text</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">was_published_recently</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.pub_date &gt;= timezone.now() - datetime.timedelta(days=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Choice</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question = models.ForeignKey(Question, on_delete=models.CASCADE)</span><br><span class="line">    choice_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    votes = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.choice_text</span><br></pre></td></tr></table></figure>
 
 <p>一个类就是一个表,该例子中创建了 Question和 Choice 2个表，有question_text，pub_date等字段。</p>
+<p>字段类型通常有以下可选项：</p>
+<ul>
+<li>AutoField：自动增长的IntegerField，通常不用指定</li>
+<li>BooleanField：布尔字段，值为True或False</li>
+<li>NullBooleanField：支持Null、True、False三种值</li>
+<li>CharField(max_length=字符长度)：字符串</li>
+<li>IntegerField：整数</li>
+<li>FloatField：浮点数</li>
+<li>DateField[auto_now=False, auto_now_add=False])：日期<ul>
+<li>参数auto_now表示每次保存对象时，自动设置该字段为当前时间，用于”最后一次修改”的时间戳，默认为false</li>
+<li>参数auto_now_add表示当对象’’第一次被创建’’时自动设置当前时间，默认为false</li>
+<li>参数auto_now_add和auto_now是相互排斥的，组合将会发生错误</li>
+</ul>
+</li>
+<li>TimeField：时间，参数同DateField</li>
+<li>DateTimeField：日期时间，参数同DateField</li>
+</ul>
+<p>约束选项：</p>
+<ul>
+<li>null：如果为 True，表示允许为空，默认值是 False</li>
+<li>blank：如果为 True，则该字段允许为空白，默认值是 False。对比：null 是数据库范畴的概念，blank 是表单验证范畴的。</li>
+<li>db_index：若值为 True, 则在表中会为此字段创建索引，默认值是 False。</li>
+<li>default：默认值。</li>
+<li>unique：如果为 True, 这个字段在表中必须有唯一值，默认值是 False。</li>
+</ul>
 <p>使用一下api对数据库进行操控：</p>
 <p> <strong>创建:</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q = Question(question_text=<span class="string">"What's new?"</span>, pub_date=timezone.now()) <span class="comment"># 在Question表中创建一行数据,q为游标</span></span><br></pre></td></tr></table></figure>
@@ -308,7 +337,23 @@
 <p>模板的命名空间：</p>
 <p>常用的是<code>polls/templates/polls/index.html</code>用第二层的polls当作命名空间</p>
 </blockquote>
-<h2 id="admin后台管理"><a href="#admin后台管理" class="headerlink" title="admin后台管理"></a>admin后台管理</h2><p>#todo</p>
+<h2 id="admin后台管理"><a href="#admin后台管理" class="headerlink" title="admin后台管理"></a>admin后台管理</h2><p><strong>创建管理员账号</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py createsuperuser</span><br></pre></td></tr></table></figure>
+
+<p>之后输入用户名和密码，在/admin页面打开即可</p>
+<blockquote>
+<p>记得在setting.py中将语言设置为’zh-hans’,将时区设置为’Asia/Shanghai’</p>
+</blockquote>
+<p><strong>在admin中注册模型</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Question</span><br><span class="line"></span><br><span class="line">admin.site.register(Question)</span><br></pre></td></tr></table></figure>
+
+<p>在admin.py中修改即可</p>
+<p><strong>定制admin后台</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> .models <span class="keyword">import</span> Question</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">QuestionAdmin</span><span class="params">(admin.ModelAdmin)</span>:</span></span><br><span class="line">    fields = [<span class="string">'pub_date'</span>, <span class="string">'question_text'</span>] <span class="comment">#更多字段显示</span></span><br><span class="line"></span><br><span class="line">admin.site.register(Question, QuestionAdmin)</span><br></pre></td></tr></table></figure>
+
+<p>在admin.py中修改。</p>
+<p>之前注册模型后只能看出单一字段。如需看多字段的话可以创建一个继承<code>admin.ModelAdmin</code>的 类，作为第二参数传递给register即可。</p>
+<p>#其他定制todo</p>
 <p><em>本文学习博客链接：<a href="https://www.liujiangblog.com/course/django/2" target="_blank" rel="noopener">https://www.liujiangblog.com/course/django/2</a></em></p>
 
 
@@ -317,6 +362,10 @@
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2020/04/11/学习django第二天/" data-toggle="tooltip" data-placement="top" title="学习django的第二天">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">

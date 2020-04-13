@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -195,10 +195,40 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="关于respond"><a href="#关于respond" class="headerlink" title="关于respond"></a>关于respond</h1><p>#todo</p>
-<h1 id="关于-request"><a href="#关于-request" class="headerlink" title="关于 request"></a>关于 request</h1><p>#todo</p>
+                <h1 id="关于HttpResponse"><a href="#关于HttpResponse" class="headerlink" title="关于HttpResponse"></a>关于HttpResponse</h1><p>HttpResponse是一个对象。</p>
+<p>可以在返回的时候申明返回的类型<code>content_type</code>，也可以选择默认</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> HttpResponse(my_data, content_type=<span class="string">'application/json'</span>, status=<span class="number">200</span>)</span><br></pre></td></tr></table></figure>
+
+<p>拥有以下特性：</p>
+<p><strong>属性：</strong></p>
+<p>HttpResponse.status_code</p>
+<p>响应的状态码，比如200。</p>
+<p><strong>子类：</strong></p>
+<ul>
+<li>class HttpResponseRedirect[source]：重定向，返回302状态码。已经被redirect()替代。？</li>
+<li>class HttpResponseBadRequest[source]：错误的请求，返回400状态码。</li>
+<li>class HttpResponseNotFound[source]：页面不存在，返回404状态码。</li>
+<li>class HttpResponseForbidden[source]：禁止访问，返回403状态码。</li>
+<li>class HttpResponseNotAllowed[source]：禁止访问，返回405状态码。</li>
+<li>class HttpResponseServerError[source]：服务器错误，返回500状态码。</li>
+</ul>
+<h1 id="关于-HttpRequest"><a href="#关于-HttpRequest" class="headerlink" title="关于 HttpRequest"></a>关于 HttpRequest</h1><p>HttpRequest是一个对象，拥有以下特性：</p>
+<p><strong>属性：</strong></p>
+<p>HttpRequest.scheme</p>
+<p>字符串类型，表示请求的协议种类，’http’或’https’。</p>
+<p>HttpRequest.path</p>
+<p>字符串类型，表示当前请求页面的完整路径，但是不包括协议名和域名。例如：”/music/bands/the_beatles/“。</p>
+<p>HttpRequest.method</p>
+<p>字符串类型，请求的方式，有”POST”和”GET”</p>
+<p>HttpRequest.COOKIES</p>
+<p>包含所有Cookie信息的字典。</p>
 <h1 id="关于-cookie和session"><a href="#关于-cookie和session" class="headerlink" title="关于 cookie和session"></a>关于 cookie和session</h1><p>#todo</p>
-<h1 id="关于序列化"><a href="#关于序列化" class="headerlink" title="关于序列化"></a>关于序列化</h1><p>#todo</p>
+<h1 id="关于序列化"><a href="#关于序列化" class="headerlink" title="关于序列化"></a>关于序列化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> serializers</span><br><span class="line">data = serializers.serialize(<span class="string">"json"</span>, SomeModel.objects.all())</span><br><span class="line">data = serializers.serialize(<span class="string">'xml'</span>, SomeModel.objects.all(), fields=(<span class="string">'name'</span>,<span class="string">'size'</span>)) <span class="comment">#有选择的序列化</span></span><br></pre></td></tr></table></figure>
+
+<p>序列化主要是将模型model中的查询结果（QuerySet对象）转化成符合”json”,”xml”,”yaml”等格式的字符串</p>
+<p>实践后发现序列化后格式是这样的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;pk&quot;: &quot;4b678b301dfd8a4e0dad910de3ae245b&quot;,</span><br><span class="line">        &quot;model&quot;: &quot;sessions.session&quot;,</span><br><span class="line">        &quot;fields&quot;: &#123;</span><br><span class="line">            &quot;expire_date&quot;: &quot;2013-01-16T08:16:59.844Z&quot;,</span><br><span class="line">            ...</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 
 
                 <hr>

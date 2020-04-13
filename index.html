@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -232,11 +232,15 @@ git提交版本123git add file_name git ......
             
         </h3>
         <div class="post-content-preview">
-            关于respond#todo
-关于 request#todo
-关于 cookie和session#todo
-关于序列化#todo
-...
+            关于HttpResponseHttpResponse是一个对象。
+可以在返回的时候申明返回的类型content_type，也可以选择默认
+1return HttpResponse(my_data, content_type='application/json', status=200)
+
+拥有以下特性：
+属性：
+HttpResponse.status_code
+响应的状态码，比如200。
+子......
         </div>
     </a>
     <p class="post-meta">

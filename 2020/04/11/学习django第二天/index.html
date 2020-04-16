@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -222,7 +222,69 @@
 <p>字符串类型，请求的方式，有”POST”和”GET”</p>
 <p>HttpRequest.COOKIES</p>
 <p>包含所有Cookie信息的字典。</p>
-<h1 id="关于-cookie和session"><a href="#关于-cookie和session" class="headerlink" title="关于 cookie和session"></a>关于 cookie和session</h1><p>#todo</p>
+<h1 id="关于QueryDict对象"><a href="#关于QueryDict对象" class="headerlink" title="关于QueryDict对象"></a>关于QueryDict对象</h1><p>HttpRequest的GET，POST都是QueryDict对象</p>
+<blockquote>
+<p>QueryDict对象和字典的区别 ：</p>
+<p>QueryDict对象可以一个值对应多个值，比如 a=3&amp;a=4&amp;b=5</p>
+<p>字典只能一个值对应一个值 ，比如 {“a”=[1,2,3]}</p>
+</blockquote>
+<p><strong>方法:</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HttpRequest.GET.get(<span class="string">'键'</span>,default)</span><br><span class="line">HttpRequest.GET[<span class="string">'键'</span>] <span class="comment">#简写   #POST同理</span></span><br></pre></td></tr></table></figure>
+
+<p>如果一个键同时拥有多个值，获取最后一个值</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HttpRequest.GET.getlist(<span class="string">'键'</span>,default) <span class="comment">#POST同理</span></span><br></pre></td></tr></table></figure>
+
+<p>将键的值以列表返回，可以获取一个键的多个值</p>
+<p>当然，可以通过这样遍历GET或者POST所有的键：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> key <span class="keyword">in</span> request.GET:</span><br><span class="line">	print(key)</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="关于-cookie和session"><a href="#关于-cookie和session" class="headerlink" title="关于 cookie和session"></a>关于 cookie和session</h1><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>通过浏览器在用户的本地存储的一段明文信息，使用键值方式进行存储。<br>使用场景：用户名，浏览记录，主题设置等一些不重要的信息</p>
+<p>运行机制：</p>
+<p><img src="%5Cimg%5C%E5%AD%A6%E4%B9%A0django%E7%9A%84%E7%AC%AC%E4%BA%8C%E5%A4%A9.png" alt="学习django的第二天"></p>
+<p>设置cookie：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">set_cookie</span><span class="params">(request)</span>:</span></span><br><span class="line">    response = HttpResponse(<span class="string">"aaaa"</span>)</span><br><span class="line">    response.set_cookie(<span class="string">'number'</span>, <span class="string">'1254'</span>,max_age=<span class="literal">None</span>) <span class="comment">#max_age 默认None，浏览器关闭后删除，以秒为单位 max_age=60*60*24 一天</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+
+
+<p>访问cookie：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.COOKIES[<span class="string">'number'</span>] <span class="comment">#注意是request</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="session会话"><a href="#session会话" class="headerlink" title="session会话"></a>session会话</h3><p>本质是存储在服务器的cookie，安全性更高。</p>
+<p>使用场景：账户密码，钱包余额，在不同页面保持登录等</p>
+<p>session依赖于cookie的使用，因为session是通过cookie中的cookieid这个哈希值来区分每一个用户的。</p>
+<p>session可以选择在一下方式存储：</p>
+<ul>
+<li>保存在数据库内 （一般为默认方式，迁移后会在数据库中创建django_session表，有三个字段：键，值，过期时间）</li>
+<li>保存到缓存</li>
+<li>保存到文件内</li>
+<li>保存到cookie内</li>
+</ul>
+<p>设置session：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.session[<span class="string">'key'</span>] = <span class="string">'hello123'</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>获取session：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">request.session.get(<span class="string">'key'</span>,<span class="string">'默认值'</span>) <span class="comment">#默认值为如果在session中没有这个值，则返回默认值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>删除session：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">request.session.clear() <span class="comment">#在存储中删去所有session的值</span></span><br><span class="line">request.session.flush() <span class="comment">#在存储中删去所有session</span></span><br><span class="line"><span class="keyword">del</span> request.session[<span class="string">'键'</span>] <span class="comment">#删除这个键和其对应的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>设置会话过期时间：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">request.session.set_expiry(value)</span><br><span class="line"><span class="comment"># 默认2个星期过期</span></span><br><span class="line"><span class="comment"># value为int ，则代表秒</span></span><br><span class="line"><span class="comment"># value为None，则永不过期</span></span><br><span class="line"><span class="comment"># value为0，在用户浏览器关闭时过期</span></span><br></pre></td></tr></table></figure>
+
+
+
 <h1 id="关于序列化"><a href="#关于序列化" class="headerlink" title="关于序列化"></a>关于序列化</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core <span class="keyword">import</span> serializers</span><br><span class="line">data = serializers.serialize(<span class="string">"json"</span>, SomeModel.objects.all())</span><br><span class="line">data = serializers.serialize(<span class="string">'xml'</span>, SomeModel.objects.all(), fields=(<span class="string">'name'</span>,<span class="string">'size'</span>)) <span class="comment">#有选择的序列化</span></span><br></pre></td></tr></table></figure>
 
 <p>序列化主要是将模型model中的查询结果（QuerySet对象）转化成符合”json”,”xml”,”yaml”等格式的字符串</p>

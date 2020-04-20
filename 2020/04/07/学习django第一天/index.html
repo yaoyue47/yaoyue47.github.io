@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -217,11 +217,11 @@
 <p>创建app：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp polls</span><br></pre></td></tr></table></figure>
 
-<p>将model.py的代码转换成实际数据库结构：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
-
 <p>创建迁移文件 <code>polls/migrations/0001_initial.py</code> 方便git记录：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br></pre></td></tr></table></figure>
+
+<p> 将model.py的代码转换成实际数据库结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
 
 
 
@@ -269,10 +269,10 @@
 <li>AutoField：自动增长的IntegerField，通常不用指定</li>
 <li>BooleanField：布尔字段，值为True或False</li>
 <li>NullBooleanField：支持Null、True、False三种值</li>
-<li>CharField(max_length=字符长度)：字符串</li>
+<li>CharField(max_length=字符长度)：字符串 。必须接收一个max_length参数</li>
 <li>IntegerField：整数</li>
 <li>FloatField：浮点数</li>
-<li>DateField[auto_now=False, auto_now_add=False])：日期<ul>
+<li>DateField(auto_now=False, auto_now_add=False)：日期<ul>
 <li>参数auto_now表示每次保存对象时，自动设置该字段为当前时间，用于”最后一次修改”的时间戳，默认为false</li>
 <li>参数auto_now_add表示当对象’’第一次被创建’’时自动设置当前时间，默认为false</li>
 <li>参数auto_now_add和auto_now是相互排斥的，组合将会发生错误</li>
@@ -317,6 +317,7 @@
 <p>使用model的时候记得需要在settings.py中的INSTALLED_APPS内将所创建的app加入</p>
 <p>格式为 <code>INSTALLED_APPS = [&#39;polls&#39;,]</code></p>
 </blockquote>
+<p>################todo 关于关联方面知识</p>
 <h3 id="HTML模板文件备注"><a href="#HTML模板文件备注" class="headerlink" title="HTML模板文件备注"></a>HTML模板文件备注</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; question.question_text &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> # 访问question的值</span><br></pre></td></tr></table></figure>
 
 <blockquote>

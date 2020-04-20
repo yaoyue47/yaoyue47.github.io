@@ -287,6 +287,7 @@
 <li>blank：如果为 True，则该字段允许为空白，默认值是 False。对比：null 是数据库范畴的概念，blank 是表单验证范畴的。</li>
 <li>db_index：若值为 True, 则在表中会为此字段创建索引，默认值是 False。</li>
 <li>default：默认值。</li>
+<li>primary_key：若为 True，则该字段会成为模型的主键字段，默认值是 False，一般作为 AutoField 的选项使用。</li>
 <li>unique：如果为 True, 这个字段在表中必须有唯一值，默认值是 False。</li>
 </ul>
 <p>使用一下api对数据库进行操控：</p>

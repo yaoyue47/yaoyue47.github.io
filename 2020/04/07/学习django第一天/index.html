@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -258,10 +258,10 @@
 <li>url的命名</li>
 <li>arg：传给url的值</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">"res"</span>: <span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> JsonResponse(&#123;<span class="string">"res"</span>: <span class="number">1</span>&#125;)</span><br><span class="line"><span class="keyword">return</span> JsonResponse([&#123;<span class="string">"res"</span>:<span class="number">2</span>&#125;,&#123;<span class="string">"res1"</span>:<span class="number">2</span>&#125;] , safe=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
-<p>返回json格式的参数，函数内需要一个字典</p>
-<h3 id="model-py-文件备注"><a href="#model-py-文件备注" class="headerlink" title="model.py 文件备注"></a>model.py 文件备注</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    pub_date = models.DateTimeField(<span class="string">'date published'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.question_text</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">was_published_recently</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.pub_date &gt;= timezone.now() - datetime.timedelta(days=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Choice</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question = models.ForeignKey(Question, on_delete=models.CASCADE)</span><br><span class="line">    choice_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    votes = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.choice_text</span><br></pre></td></tr></table></figure>
+<p>返回json格式的参数，函数内需要一个字典(默认)，如果需要返回json格式的list，需要设置safe=False</p>
+<h3 id="model-py-文件备注"><a href="#model-py-文件备注" class="headerlink" title="model.py 文件备注"></a>model.py 文件备注</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"><span class="keyword">import</span> datetime</span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Question</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    pub_date = models.DateTimeField(<span class="string">'date published'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.question_text</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">was_published_recently</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.pub_date &gt;= timezone.now() - datetime.timedelta(days=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Choice</span><span class="params">(models.Model)</span>:</span></span><br><span class="line">    question = models.ForeignKey(Question, on_delete=models.CASCADE) <span class="comment"># on_delete必填</span></span><br><span class="line">    <span class="comment"># 一对多关联 关联写在多的一方</span></span><br><span class="line">    choice_text = models.CharField(max_length=<span class="number">200</span>)</span><br><span class="line">    votes = models.IntegerField(default=<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__str__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.choice_text</span><br></pre></td></tr></table></figure>
 
 <p>一个类就是一个表,该例子中创建了 Question和 Choice 2个表，有question_text，pub_date等字段。</p>
 <p>字段类型通常有以下可选项：</p>
@@ -301,10 +301,10 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">q.question_text</span><br><span class="line">q.question_text = <span class="string">"aaaaaaa"</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>查询数据库所有的question</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.all() <span class="comment">#如果修改了类中的_str_函数，则输出更直观</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.all() <span class="comment">#如果修改了类中的_str_函数，则输出更直观 返回对象集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.values() <span class="comment">#返回字典集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.order_by(<span class="string">"-id"</span>)[:<span class="number">6</span>:<span class="number">2</span>] <span class="comment">#按照id的逆排序,取前6个，步长为2</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>查询</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Question.objects.filter(id=<span class="number">1</span>) <span class="comment">#查询集 多个</span></span><br><span class="line">Question.objects.get(id=<span class="number">1</span>) <span class="comment">#查询单个</span></span><br><span class="line">Question.objects.get(pk=<span class="number">1</span>) <span class="comment">#pk为主键</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Question.objects.filter(id=<span class="number">1</span>) <span class="comment">#查询集 多个</span></span><br><span class="line">Question.objects.get(id=<span class="number">1</span>) <span class="comment">#查询单个  如果查询结构为None或者多个都会报错</span></span><br><span class="line">Question.objects.get(pk=<span class="number">1</span>) <span class="comment">#pk为主键</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>调用所写的方法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.was_published_recently()</span><br></pre></td></tr></table></figure>
@@ -312,17 +312,28 @@
 <p><strong>创建</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.choice_set.create(choice_text=<span class="string">'Not much'</span>, votes=<span class="number">0</span>) <span class="comment">#choice_set是设置了choice后自动生成</span></span><br></pre></td></tr></table></figure>
 
+<p> <strong>关联：通过主表查子表</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">teacher.student_set.all() <span class="comment">#默认生成的外键属性，规则为子表名字小写+_set</span></span><br><span class="line">teacher.student_teacher.all() </span><br><span class="line"><span class="comment">#如果在model里设置外键的时候指定了related_name='student_teacher',则效果同上一条一样</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>关联：通过子表查主表</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">student.teacher <span class="comment">#teacher为Student表中的字段名，关联Teacher表</span></span><br></pre></td></tr></table></figure>
+
+
+
 
 
 <blockquote>
 <p>使用model的时候记得需要在settings.py中的INSTALLED_APPS内将所创建的app加入</p>
 <p>格式为 <code>INSTALLED_APPS = [&#39;polls&#39;,]</code></p>
 </blockquote>
-<p>################todo 关于关联方面知识</p>
 <h3 id="HTML模板文件备注"><a href="#HTML模板文件备注" class="headerlink" title="HTML模板文件备注"></a>HTML模板文件备注</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; question.question_text &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> # 访问question的值</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shumeipai_name_list = &#123;&#123;shumeipai|safe&#125;&#125; <span class="comment">//在js中使用模板需要加safe过滤器</span></span><br></pre></td></tr></table></figure>
+
+
+
 <blockquote>
-<p><strong>关于删除模板文件的硬编码</strong>：</p>
+<p>关于删除模板文件的硬编码**：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/polls/&#123;&#123; question.id &#125;&#125;/"</span>&gt;</span>&#123;&#123; question.question_text &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span> # 硬编码</span><br></pre></td></tr></table></figure>
 
 <p>引入路径的name后：</p>

@@ -94,13 +94,6 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -109,6 +102,13 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -304,7 +304,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.all() <span class="comment">#如果修改了类中的_str_函数，则输出更直观 返回对象集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.values() <span class="comment">#返回字典集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.order_by(<span class="string">"-id"</span>)[:<span class="number">6</span>:<span class="number">2</span>] <span class="comment">#按照id的逆排序,取前6个，步长为2</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>查询</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Question.objects.filter(id=<span class="number">1</span>) <span class="comment">#查询集 多个</span></span><br><span class="line">Question.objects.get(id=<span class="number">1</span>) <span class="comment">#查询单个  如果查询结构为None或者多个都会报错</span></span><br><span class="line">Question.objects.get(pk=<span class="number">1</span>) <span class="comment">#pk为主键</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Question.objects.filter(id=<span class="number">1</span>) <span class="comment">#查询集 多个</span></span><br><span class="line">Blog.objects.filter(title__contains =<span class="string">"django"</span>) <span class="comment">#字段名__contains 包含查询，区分大小写</span></span><br><span class="line">Blog.objects.filter(title__startswith =<span class="string">"django"</span>) <span class="comment">#查询以django为开头</span></span><br><span class="line">Blog.objects.filter(id__in = [<span class="number">3</span>,<span class="number">6</span>,<span class="number">9</span>])</span><br><span class="line">Blog.objects.filter(id__range =(<span class="number">30</span>,<span class="number">45</span>))</span><br><span class="line">Question.objects.filter(pub_date__year=<span class="number">2005</span>)  <span class="comment">#字段名__year 查询时间的年</span></span><br><span class="line">Question.objects.filter(date__lt=start) <span class="comment"># lt小于 lte小于等于 gt大于 gte大于等于</span></span><br><span class="line"></span><br><span class="line">Question.objects.get(id=<span class="number">1</span>) <span class="comment">#查询单个  如果查询结果为None或者多个都会报错</span></span><br><span class="line">Question.objects.get(pk=<span class="number">1</span>) <span class="comment">#pk为主键</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>调用所写的方法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.was_published_recently()</span><br></pre></td></tr></table></figure>
@@ -326,9 +326,19 @@
 <p>使用model的时候记得需要在settings.py中的INSTALLED_APPS内将所创建的app加入</p>
 <p>格式为 <code>INSTALLED_APPS = [&#39;polls&#39;,]</code></p>
 </blockquote>
-<h3 id="HTML模板文件备注"><a href="#HTML模板文件备注" class="headerlink" title="HTML模板文件备注"></a>HTML模板文件备注</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;&#123; question.question_text &#125;&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span> # 访问question的值</span><br></pre></td></tr></table></figure>
+<h3 id="HTML模板文件备注"><a href="#HTML模板文件备注" class="headerlink" title="HTML模板文件备注"></a>HTML模板文件备注</h3><p><strong>变量的使用</strong></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-variable">&#123;&#123; variable &#125;&#125;</span><span class="xml"> //variable为render中字典的键</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><span class="template-variable">&#123;&#123; question.question_text &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span> # 访问question的值</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shumeipai_name_list = &#123;&#123;shumeipai|safe&#125;&#125; <span class="comment">//在js中使用模板需要加safe过滤器</span></span><br></pre></td></tr></table></figure>
+<p><strong>过滤器</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shumeipai_name_list = &#123;&#123;shumeipai|safe&#125;&#125; <span class="comment">//在js中使用模板需要加safe过滤器</span></span><br><span class="line">&#123;&#123; value|<span class="keyword">default</span>:<span class="string">"nothing"</span> &#125;&#125; 为变量提供默认值</span><br><span class="line">&#123;&#123; value|date:<span class="string">"D d M Y"</span> &#125;&#125; &#123;&#123; value|time:<span class="string">"H:i"</span> &#125;&#125; 日期格式化</span><br></pre></td></tr></table></figure>
+
+<p><strong>for标签</strong></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> athlete <span class="keyword">in</span> athlete_list %&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123; athlete.name &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p><strong>if标签</strong></p>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list %&#125;</span></span><br><span class="line"><span class="xml">    Number of athletes: </span><span class="template-variable">&#123;&#123; athlete_list|<span class="name">length</span> &#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">elif</span></span> athlete_in_locker_room_list %&#125;</span></span><br><span class="line"><span class="xml">    Athletes should be out of the locker room soon!</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></span><br><span class="line"><span class="xml">    No athletes.</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list &gt;1 %&#125;</span><span class="xml"> 可以大于值</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list and coach_list %&#125;</span><span class="xml"> 连等判断</span></span><br><span class="line"><span class="xml">//</span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list == athlete_in_locker_room_list %&#125;</span><span class="xml"> 可以判断等于其他变量，不需要</span><span class="template-variable">&#123;&#123;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -341,10 +351,6 @@
 
 <p>再引入app的命名空间后：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"&#123;% url 'polls:detail' question.id %&#125;"</span>&gt;</span>&#123;&#123; question.question_text &#125;&#125;<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span> # polls 需要在polls/urls.py中添加app_name = 'polls'方可使用</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
-<p><strong>解决跨站请求伪造的安全问题</strong></p>
-<p>将{ %csrf_token% }加入form表单任意位置</p>
 </blockquote>
 <blockquote>
 <p>模板的命名空间：</p>

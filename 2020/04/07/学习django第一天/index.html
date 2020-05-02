@@ -94,6 +94,13 @@
 
                         
                         <li>
+                            <a href="/about/">about</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/archives/">Archives</a>
                         </li>
                         
@@ -102,13 +109,6 @@
                         
                         <li>
                             <a href="/tags/">Tags</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -320,8 +320,6 @@
 
 
 
-
-
 <blockquote>
 <p>使用model的时候记得需要在settings.py中的INSTALLED_APPS内将所创建的app加入</p>
 <p>格式为 <code>INSTALLED_APPS = [&#39;polls&#39;,]</code></p>
@@ -330,13 +328,13 @@
 <figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-variable">&#123;&#123; variable &#125;&#125;</span><span class="xml"> //variable为render中字典的键</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span></span><span class="template-variable">&#123;&#123; question.question_text &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span> # 访问question的值</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>过滤器</strong></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shumeipai_name_list = &#123;&#123;shumeipai|safe&#125;&#125; <span class="comment">//在js中使用模板需要加safe过滤器</span></span><br><span class="line">&#123;&#123; value|<span class="keyword">default</span>:<span class="string">"nothing"</span> &#125;&#125; 为变量提供默认值</span><br><span class="line">&#123;&#123; value|date:<span class="string">"D d M Y"</span> &#125;&#125; &#123;&#123; value|time:<span class="string">"H:i"</span> &#125;&#125; 日期格式化</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shumeipai_name_list = &#123;&#123;shumeipai|safe&#125;&#125; <span class="comment">//在js中使用模板需要加safe过滤器</span></span><br><span class="line">&#123;&#123; value|<span class="keyword">default</span>:<span class="string">"nothing"</span> &#125;&#125; 为变量提供默认值</span><br><span class="line">&#123;&#123; value|date:<span class="string">"Y-m-d H:i:s"</span> &#125;&#125; &#123;&#123; value|time:<span class="string">"H:i"</span> &#125;&#125; 日期格式化</span><br></pre></td></tr></table></figure>
 
 <p><strong>for标签</strong></p>
 <figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">for</span></span> athlete <span class="keyword">in</span> athlete_list %&#125;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><span class="template-variable">&#123;&#123; athlete.name &#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endfor</span></span> %&#125;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
 
 <p><strong>if标签</strong></p>
-<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list %&#125;</span></span><br><span class="line"><span class="xml">    Number of athletes: </span><span class="template-variable">&#123;&#123; athlete_list|<span class="name">length</span> &#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">elif</span></span> athlete_in_locker_room_list %&#125;</span></span><br><span class="line"><span class="xml">    Athletes should be out of the locker room soon!</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></span><br><span class="line"><span class="xml">    No athletes.</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list &gt;1 %&#125;</span><span class="xml"> 可以大于值</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list and coach_list %&#125;</span><span class="xml"> 连等判断</span></span><br><span class="line"><span class="xml">//</span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list == athlete_in_locker_room_list %&#125;</span><span class="xml"> 可以判断等于其他变量，不需要</span><span class="template-variable">&#123;&#123;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list %&#125;</span></span><br><span class="line"><span class="xml">    Number of athletes: </span><span class="template-variable">&#123;&#123; athlete_list|<span class="name">length</span> &#125;&#125;</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">elif</span></span> athlete_in_locker_room_list %&#125;</span></span><br><span class="line"><span class="xml">    Athletes should be out of the locker room soon!</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">else</span></span> %&#125;</span></span><br><span class="line"><span class="xml">    No athletes.</span></span><br><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">endif</span></span> %&#125;</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list &gt;1 %&#125;</span><span class="xml"> 可以大于值</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list and coach_list %&#125;</span><span class="xml"> 连等判断</span></span><br><span class="line"><span class="xml">// </span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> not athlete_list or coach_list %&#125;</span></span><br><span class="line"><span class="xml">//</span><span class="template-tag">&#123;% <span class="name"><span class="name">if</span></span> athlete_list == athlete_in_locker_room_list %&#125;</span><span class="xml"> 可以判断等于其他变量，不需要</span><span class="template-variable">&#123;&#123;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
 
 

@@ -241,7 +241,7 @@
 
 
 <p>获取json请求的数据：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.loads(request.body).get(<span class="string">'user'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json.loads(request.body).get(<span class="string">'user'</span>) <span class="comment">#这种方法适用于无法直接用POST.get()方法获取数据时适用，注意ajax请求时数据需要用JSON.stringify()处理成字符串</span></span><br></pre></td></tr></table></figure>
 
 
 

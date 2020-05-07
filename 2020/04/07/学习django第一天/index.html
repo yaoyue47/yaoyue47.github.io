@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -292,10 +292,7 @@
 </ul>
 <p>使用一下api对数据库进行操控：</p>
 <p> <strong>创建:</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q = Question(question_text=<span class="string">"What's new?"</span>, pub_date=timezone.now()) <span class="comment"># 在Question表中创建一行数据,q为游标</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>保存</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.save()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方式一</span></span><br><span class="line">q = Question(question_text=<span class="string">"What's new?"</span>, pub_date=timezone.now()) </span><br><span class="line">q.save() <span class="comment"># 在Question表中创建一行数据,q为游标</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式二</span></span><br><span class="line">Blog.objects.create(name=<span class="string">'Beatles Blog'</span>, tagline=<span class="string">'All the latest Beatles news.'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方式三 带关联的查询</span></span><br><span class="line">q = Question.objects.get(pk=<span class="number">1</span>)</span><br><span class="line">q.choice_set.create(choice_text=<span class="string">'Not much'</span>, votes=<span class="number">0</span>) <span class="comment"># 在choice中创建一条关联q的数据</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>调用和修改</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">q.question_text</span><br><span class="line">q.question_text = <span class="string">"aaaaaaa"</span></span><br></pre></td></tr></table></figure>
@@ -304,7 +301,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 方法一 可以更新多条</span></span><br><span class="line">User.objects.filter(id=<span class="number">1</span>).update(username=<span class="string">'nick'</span>,is_active=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法二 一次只能更新一条 auto_now修饰的字段会更新</span></span><br><span class="line">t = User.objects.get(id=<span class="number">1</span>)</span><br><span class="line">t.username=<span class="string">'nick'</span></span><br><span class="line">t.is_active=<span class="literal">True</span></span><br><span class="line">t.save()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将字典或列表更新到数据库中</span></span><br><span class="line">data = &#123;<span class="string">'username'</span>:<span class="string">'nick'</span>,<span class="string">'is_active'</span>:<span class="string">'0'</span>&#125;</span><br><span class="line">User.objects.filter(id=<span class="number">1</span>).update(**data) <span class="comment">#通常我们再变量前加一个星号*表示这个变量是元组/列表，加两个星号表示这个参数是字典</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>删除</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">User.objects.filter(pub_date__year=<span class="number">2005</span>).delete() <span class="comment">#delete()方法</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User.objects.filter(pub_date__year=<span class="number">2005</span>).delete() <span class="comment"># delete()方法</span></span><br><span class="line">User.objects.get(id=<span class="number">1</span>).delete() <span class="comment"># delete()方法</span></span><br></pre></td></tr></table></figure>
 
 <p><strong>查询数据库所有的question</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.all() <span class="comment">#如果修改了类中的_str_函数，则输出更直观 返回对象集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.values() <span class="comment">#返回字典集</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>Question.objects.order_by(<span class="string">"-id"</span>)[:<span class="number">6</span>:<span class="number">2</span>] <span class="comment">#按照id的逆排序,取前6个，步长为2</span></span><br></pre></td></tr></table></figure>
@@ -314,9 +311,6 @@
 
 <p><strong>调用所写的方法</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.was_published_recently()</span><br></pre></td></tr></table></figure>
-
-<p><strong>创建</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">q.choice_set.create(choice_text=<span class="string">'Not much'</span>, votes=<span class="number">0</span>) <span class="comment">#choice_set是设置了choice后自动生成</span></span><br></pre></td></tr></table></figure>
 
 <p> <strong>关联：通过主表查子表</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">teacher.student_set.all() <span class="comment">#默认生成的外键属性，规则为子表名字小写+_set</span></span><br><span class="line">teacher.student_teacher.all() </span><br><span class="line"><span class="comment">#如果在model里设置外键的时候指定了related_name='student_teacher',则效果同上一条一样</span></span><br></pre></td></tr></table></figure>

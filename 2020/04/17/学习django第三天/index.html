@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -201,7 +201,7 @@
 <h3 id="为什么需要Nginx"><a href="#为什么需要Nginx" class="headerlink" title="为什么需要Nginx:"></a>为什么需要Nginx:</h3><p>一个普通的个人网站，访问量不大的话，当然可以由<code>uWSGI</code>和<code>Django</code>构成。但是一旦访问量过大，客户端请求连接就要进行长时间的等待。这个时候就出来了分布式服务器，我们可以多来几台web服务器，都能处理请求。但是谁来分配客户端的请求连接和web服务器呢？Nginx就是这样一个管家的存在，由它来分配。这也就是由<strong>Nginx实现反向代理</strong>，即代理服务器。</p>
 <p>同时Nginx也可以实现静态文件的直接发送，这样请求静态文件不用经过框架。</p>
 <p><img src="/img/%E5%AD%A6%E4%B9%A0django%E7%AC%AC%E4%B8%89%E5%A4%A9.png" alt="学习django第三天"></p>
-<p><img src="/img/%E5%AD%A6%E4%B9%A0djo%E7%AC%AC%E4%B8%89%E5%A4%A9.png" alt="学习djo第三天"></p>
+<p><img src="/img/%E5%AD%A6%E4%B9%A0djo%E7%AC%AC%E4%B8%89%E5%A4%A9.jpg" alt="学习djo第三天"></p>
 <p>原文链接：<a href="https://blog.csdn.net/CHENYAoo/article/details/83055108" target="_blank" rel="noopener">https://blog.csdn.net/CHENYAoo/article/details/83055108</a></p>
 <h1 id="如何完整的删掉一个项目的app？"><a href="#如何完整的删掉一个项目的app？" class="headerlink" title="如何完整的删掉一个项目的app？"></a>如何完整的删掉一个项目的app？</h1><h3 id="1-删除models-py"><a href="#1-删除models-py" class="headerlink" title="1.删除models.py"></a>1.删除models.py</h3><p>无论是删除一个单独的model还是删除整个App,都需要首先删除<code>models.py</code>文件中的模型。</p>
 <ul>

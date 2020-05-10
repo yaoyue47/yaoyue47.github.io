@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -218,6 +218,15 @@
 <li>在<code>urls.py</code>中移除该App相关内容。</li>
 </ul>
 <p>原文链接：<a href="https://blog.csdn.net/huochen1994/article/details/52680067" target="_blank" rel="noopener">https://blog.csdn.net/huochen1994/article/details/52680067</a></p>
+<h1 id="django-关于manage-py-migrate无效的问题"><a href="#django-关于manage-py-migrate无效的问题" class="headerlink" title="django-关于manage.py migrate无效的问题"></a>django-关于manage.py migrate无效的问题</h1><h3 id="1-原因"><a href="#1-原因" class="headerlink" title="1.原因"></a>1.原因</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations</span><br></pre></td></tr></table></figure>
+
+<p>这条语句是将modle.py中的代码生成新的迁移文件<code>polls/migrations/0001_initial.py</code>  ,该文件记录当前modle.py和最新的迁移文件之间的变化量</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+
+<p>将迁移文件的内容映射成实际数据库的结构，同时在<code>django_migrations</code>表中创建相应的记录。</p>
+<p>如果迁移文件中的自增ID已经出现在数据库的<code>django_migrations</code>表中，在Django看来，被记录了就相当于已应用，所以，会出现刚开始的<code>No migrations to apply.</code></p>
+<h3 id="2-预防措施"><a href="#2-预防措施" class="headerlink" title="2.预防措施"></a>2.预防措施</h3><p>删除migrations文件的同时到数据库<code>django_migrations</code>表中删除相应记录。</p>
+<p>原文链接：<a href="https://blog.csdn.net/qq_25730711/article/details/60327344" target="_blank" rel="noopener">https://blog.csdn.net/qq_25730711/article/details/60327344</a></p>
 
 
                 <hr>

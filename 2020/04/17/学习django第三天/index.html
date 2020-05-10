@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -229,6 +229,64 @@
 <p>如果迁移文件中的自增ID已经出现在数据库的<code>django_migrations</code>表中，在Django看来，被记录了就相当于已应用，所以，会出现刚开始的<code>No migrations to apply.</code></p>
 <h3 id="2-预防措施"><a href="#2-预防措施" class="headerlink" title="2.预防措施"></a>2.预防措施</h3><p>删除migrations文件的同时到数据库<code>django_migrations</code>表中删除相应记录。</p>
 <p>原文链接：<a href="https://blog.csdn.net/qq_25730711/article/details/60327344" target="_blank" rel="noopener">https://blog.csdn.net/qq_25730711/article/details/60327344</a></p>
+<h1 id="细数部署djanog中遇到的坑"><a href="#细数部署djanog中遇到的坑" class="headerlink" title="细数部署djanog中遇到的坑"></a>细数部署djanog中遇到的坑</h1><p>今日被迫花掉一天时间来部署django项目，处处遇到坑，差点被劝退，唉。详细记录之</p>
+<h3 id="django中的坑："><a href="#django中的坑：" class="headerlink" title="django中的坑："></a>django中的坑：</h3><p>django中<code>setting</code>中设置选项有个<code>DEBUG</code> ,默认开启，就是平时的开发模式，关闭之后有2个改变：</p>
+<ul>
+<li>报错的话不会输出报错信息</li>
+<li>django不再处理静态文件，也就是说如果不布置nginx的话就无法使用静态文件</li>
+</ul>
+<p>设置中有3个配置与之有关，</p>
+<ul>
+<li>STATIC_URL = ‘/static/‘ 为每一个app指定其中的静态文件的位置，必须填，填写后模板文件可以这么写</li>
+</ul>
+<figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="template-tag">&#123;% <span class="name"><span class="name">load</span></span> static %&#125;</span></span><br><span class="line"><span class="xml">href="</span><span class="template-tag">&#123;% <span class="name"><span class="name">static</span></span> 'polls/style.css' %&#125;</span><span class="xml">"</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>STATICFILES_DIRS= [    os.path.join(BASE_DIR, ‘static’) ]  配置公共的静态文件的地方，配置后会在整个 <code>Project</code> 的根目录生成公共静态文件夹</li>
+<li>STATIC_ROOT = ‘/root/static_root/‘ 在指定路径（根目录）下生成文件夹，再执行这个命令</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py collectstatic</span><br></pre></td></tr></table></figure>
+
+<p>django会将所有的静态文件收集到这个文件夹，方便nginx的配置使用</p>
+<p>原文链接：<a href="https://juejin.im/entry/5ac439af5188255cb07d52f0" target="_blank" rel="noopener">https://juejin.im/entry/5ac439af5188255cb07d52f0</a></p>
+<h3 id="uwsgi中的坑"><a href="#uwsgi中的坑" class="headerlink" title="uwsgi中的坑"></a>uwsgi中的坑</h3><p>安装：(无坑)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install uwsgi</span><br></pre></td></tr></table></figure>
+
+<p>在任意位置（/root）下新建一个<code>myconf.ini</code> 文件，写入如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[uwsgi]</span></span><br><span class="line"><span class="attr">socket</span> = <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">3031</span> <span class="comment"># 套接字的端口，无法直接访问， 如果写成http = :80 的话才能直接访问</span></span><br><span class="line"><span class="attr">chdir</span> = /root/djo/ <span class="comment">#指向django工程目录</span></span><br><span class="line"><span class="attr">wsgi-file</span> = djo/wsgi.py <span class="comment">#指向django中的wsgi.py文件</span></span><br><span class="line"><span class="attr">processes</span> = <span class="number">4</span></span><br><span class="line"><span class="attr">threads</span> = <span class="number">2</span></span><br><span class="line"><span class="attr">master</span> = <span class="literal">true</span> </span><br><span class="line"><span class="attr">stats</span>=/root/uwsgi.status           将状态信息记录在这里 需要手动创建</span><br><span class="line"><span class="attr">pidfile</span>=/root/uwsgi.pid				将pid(进程号)记录在这里，方便以后关闭和重启uwsgi进程 需要手动创建</span><br></pre></td></tr></table></figure>
+
+<p>使用命令：</p>
+<p>启动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --ini myconf.ini # 以myconf.ini的配置启动uwsgi</span><br></pre></td></tr></table></figure>
+
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --reload uwsgi.pid #寻找uwsgi.pid文件,按文件中的值重启对应进程</span><br></pre></td></tr></table></figure>
+
+<p>关闭</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uwsgi --stop uwsgi.pid</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="nginx中的坑"><a href="#nginx中的坑" class="headerlink" title="nginx中的坑"></a>nginx中的坑</h3><p>安装：(无坑)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install nginx</span><br></pre></td></tr></table></figure>
+
+<p>配置：</p>
+<p>在<code>/etc/nginx/nginx.conf</code> 这里修改nginx的配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">user root; # 修改user信息，不改的话会报错403</span><br><span class="line">location &#x2F; &#123;</span><br><span class="line">            include uwsgi_params;     # 导入uwsgi_params</span><br><span class="line">            uwsgi_pass 127.0.0.1:3031; # 这里是uwsgi里配置的socket的端口</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        location &#x2F;static &#123;</span><br><span class="line">            alias &#x2F;root&#x2F;static_root; # 填入django中设置的收集文件夹的目录</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>启动：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start nginx.service</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>更新django项目的步骤为：</p>
+<ul>
+<li>将<code>DEBUG</code> 改为False，上传至服务器</li>
+<li>python manage.py collectstatic 收集静态</li>
+<li>uwsgi –reload uwsgi.pid 重启uwsgi</li>
+</ul>
 
 
                 <hr>

@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -219,6 +219,18 @@
 <blockquote>
 <p>注：post请求体中也还有不同的格式。待续。。</p>
 </blockquote>
+<h4 id="填坑："><a href="#填坑：" class="headerlink" title="填坑："></a>填坑：</h4><p>请求体中主流有4种格式：</p>
+<ul>
+<li><p>form-data 既可以传输键值对，又可以传输文件。窗体数据被编码为一条消息，页上的每个控件对应消息中的一个部分，用分隔符分开。</p>
+</li>
+<li><p>x-www-form-urlencoded 默认格式，只能传输键值对。窗体数据被编码为<code>name=len&amp;age =28&amp;</code>类似这样</p>
+</li>
+<li><p>raw 可上传任意格式的文本，可以上传text、json、xml、html等各种文本类型</p>
+</li>
+<li><p>binary 二进制文件,通常为文件，且一次只能上传一个文件</p>
+</li>
+</ul>
+<p>原文链接：<a href="https://blog.csdn.net/leyangjun/article/details/79221765" target="_blank" rel="noopener">https://blog.csdn.net/leyangjun/article/details/79221765</a></p>
 
 
                 <hr>

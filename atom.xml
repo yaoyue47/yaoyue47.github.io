@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyue47.github.io/"/>
-  <updated>2020-05-16T13:54:57.769Z</updated>
+  <updated>2020-06-06T13:47:45.066Z</updated>
   <id>https://yaoyue47.github.io/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RESTful的api是什么意思？</title>
+    <link href="https://yaoyue47.github.io/2020/06/06/RESTful%E7%9A%84api%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F/"/>
+    <id>https://yaoyue47.github.io/2020/06/06/RESTful%E7%9A%84api%E6%98%AF%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D%EF%BC%9F/</id>
+    <published>2020-06-06T13:37:44.000Z</published>
+    <updated>2020-06-06T13:47:45.066Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="RESTful风格的api是什么意思？"><a href="#RESTful风格的api是什么意思？" class="headerlink" title="RESTful风格的api是什么意思？"></a>RESTful风格的api是什么意思？</h1><ul><li><p><strong>看url就知道要什么</strong></p><p>使用名词复数,例如：</p><p>GET /friends/10375923/profile</p><p>GET /admin/1234</p></li><li><p><strong>看request method就知道要干什么</strong></p><p><code>GET</code>是读，<code>POST</code>是增，<code>PUT是</code>改，<code>DELETE</code>是删</p></li><li><p><strong>看状态码就知道结果是什么</strong></p><p>200是正常，500是服务器出错，404是没找到</p></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;RESTful风格的api是什么意思？&quot;&gt;&lt;a href=&quot;#RESTful风格的api是什么意思？&quot; class=&quot;headerlink&quot; title=&quot;RESTful风格的api是什么意思？&quot;&gt;&lt;/a&gt;RESTful风格的api是什么意思？&lt;/h1&gt;&lt;ul&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+      <category term="随笔" scheme="https://yaoyue47.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>学习django的第四天</title>
+    <link href="https://yaoyue47.github.io/2020/05/27/%E5%AD%A6%E4%B9%A0django%E7%9A%84%E7%AC%AC%E5%9B%9B%E5%A4%A9/"/>
+    <id>https://yaoyue47.github.io/2020/05/27/%E5%AD%A6%E4%B9%A0django%E7%9A%84%E7%AC%AC%E5%9B%9B%E5%A4%A9/</id>
+    <published>2020-05-27T14:41:19.000Z</published>
+    <updated>2020-05-27T14:41:19.450Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>学习django第三天</title>

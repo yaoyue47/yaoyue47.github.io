@@ -101,14 +101,14 @@
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
@@ -283,7 +283,8 @@
 
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>更新django项目的步骤为：</p>
 <ul>
-<li>将<code>DEBUG</code> 改为False，上传至服务器</li>
+<li>将<code>DEBUG</code> 改为False。</li>
+<li>将<code>ALLOWED_HOSTS = [ ]</code> 中加入要部署的域名</li>
 <li><code>python manage.py collectstatic</code> 收集静态</li>
 <li><code>uwsgi --reload uwsgi.pid</code> 重启uwsgi</li>
 </ul>

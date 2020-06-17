@@ -169,6 +169,8 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#django" title="django">django</a>
+                        
                     </div>
                     <h1>学习django的第四天</h1>
                     <h2 class="subheading"></h2>
@@ -193,7 +195,13 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                
+                <h1 id="使用django发送邮件"><a href="#使用django发送邮件" class="headerlink" title="使用django发送邮件"></a>使用django发送邮件</h1><p>在<code>settings.py</code>中加入以下配置：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">EMAIL_BACKEND = <span class="string">'django.core.mail.backends.smtp.EmailBackend'</span> <span class="comment"># 照抄即可</span></span><br><span class="line">EMAIL_HOST = <span class="string">'smtp.qq.com'</span> <span class="comment"># 使用邮件商的发送服务器</span></span><br><span class="line">EMAIL_PORT = <span class="number">25</span> <span class="comment"># smtp服务端口 默认25</span></span><br><span class="line">EMAIL_HOST_USER = <span class="string">'2359240697@qq.com'</span> <span class="comment"># 发送方的账号</span></span><br><span class="line">EMAIL_HOST_PASSWORD = <span class="string">''</span> <span class="comment"># 邮件授权码 ，注意是邮件开通服务后的授权码，不是密码</span></span><br></pre></td></tr></table></figure>
+
+<p>配置后在需要使用时执行以下函数即可：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.mail <span class="keyword">import</span> send_mail</span><br><span class="line"></span><br><span class="line">send_mail(</span><br><span class="line">       <span class="string">'subject'</span>,  <span class="comment"># 主题</span></span><br><span class="line">       <span class="string">'context'</span>,  <span class="comment"># 内容</span></span><br><span class="line">       <span class="string">'2359240697@qq.com'</span>,  <span class="comment">#邮件的发送方，需要和settings.py中设置的一样才行</span></span><br><span class="line">       [<span class="string">'xxx@qq.com'</span>],   <span class="comment"># 发送对方的邮件地址，需要是列表格式</span></span><br><span class="line">   )</span><br></pre></td></tr></table></figure>
+
+
 
                 <hr>
 
@@ -234,6 +242,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#django" title="django">django</a>
+                        
                     </div>
                 </section>
                 

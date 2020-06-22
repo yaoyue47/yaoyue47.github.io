@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://yaoyue47.github.io/">
+    <link rel="canonical" href="https://yaoyue47.github.io/page/2/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -188,283 +188,21 @@
 
 <div class="post-preview">
 
-    <a href="/2020/06/22/python的tips/">
+    <a href="/2020/03/26/hello-world/">
         <h2 class="post-title">
-            python的tips
+            Hello World
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            替换讨厌的if/else结构使用字典结构替换if选择结构
-举例说明：
-1234567891011def show_price_list(user_choice):    if user_choice == 'single':        print(150)    elif user_choice == 'business':        print(300)    elif user_......
+            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Qu......
         </div>
     </a>
     <p class="post-meta">
         Posted by 姚越 on
-        2020-06-22
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/06/06/RESTful的api是什么意思？/">
-        <h2 class="post-title">
-            RESTful的api是什么意思？
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            RESTful风格的api是什么意思？
-看url就知道要什么
-使用名词复数,例如：
-GET /friends/10375923/profile
-GET /admin/1234
-
-看request method就知道要干什么
-GET是读，POST是增，PUT是改，DELETE是删
-
-看状态码就知道结果是什么
-200是正常，500是服务器出错，404是没找到
-
-
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-06-06
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/05/27/学习django的第四天/">
-        <h2 class="post-title">
-            学习django的第四天
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            使用django发送邮件在settings.py中加入以下配置：
-12345EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' # 照抄即可EMAIL_HOST = 'smtp.qq.com' # 使用邮件商的发送服务器EMAIL_PORT = 25 # smtp服务端口 默认25EMAIL_HOST_USER = '2......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-05-27
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/04/17/学习django第三天/">
-        <h2 class="post-title">
-            学习django第三天
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            uwsgi和nginx的联系web服务器和web框架：web服务器即用来接受客户端请求，建立连接，转发响应的程序。至于转发的内容是什么，交由web框架来处理，即处理这些业务逻辑。如查询数据库、生成实时信息等。Nginx就是一个web服务器，Django或flask就是web框架。
-uWSGI和WSGI：只要web服务器和web框架满足WSGI协议，它们就能相互搭配。所以WSGI只是一个协议，......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-04-17
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/04/11/git全攻略/">
-        <h2 class="post-title">
-            git全攻略
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            本地git全攻略创建仓库
-当已经有文件的时候：
-
-12cd foldergit init
-
-
-没有文件时：
-
-12cd folder_namegit init projects_name
-
-出现 .git 文件夹即表示完成创建
-
-查询当前的git用户配置信息用：
-1&gt;git config --global --list
-
-git提交版本123git add file_name git ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-04-11
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/04/11/学习django第二天/">
-        <h2 class="post-title">
-            学习django第二天
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            关于HttpResponseHttpResponse是一个对象。
-可以在返回的时候申明返回的类型content_type，也可以选择默认
-1return HttpResponse(my_data, content_type='application/json', status=200)
-
-拥有以下特性：
-属性：
-HttpResponse.status_code
-响应的状态码，比如200。
-子......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-04-11
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/04/07/学习django第一天/">
-        <h2 class="post-title">
-            学习django第一天
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            django框架设计模式MVC模型(Model)：
-Web框架和数据库的交互层。
-视图(View)：
-负责数据的显示和呈现，是对用户的直接输出。
-控制器(Controller)：
-负责从用户端收集用户的输入，可以看成提供View的反向功能。
-MTV（即django所用设计模式）模型(Model)：
-通过orm的方式,即一个python中的类来表示数据库中的一个表。本意为设计数据库的结构。
-模......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-04-07
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/03/29/各种ajax的请求姿势/">
-        <h2 class="post-title">
-            各种ajax的请求姿势
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-关于各种ajax发送post，get请求的姿势
-
-jQuery封装的请求
-1234567$.post("/try/ajax/demo_test_post.php",&#123;			name:"菜鸟教程",			url:"http://www.runoob.com"		&#125;,		function(data,status)&#123;			alert("数据: \n" + data ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-03-29
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/03/29/post和get的区别/">
-        <h2 class="post-title">
-            post和get的区别
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-关于post和get的一些区别
-
-在浏览器中的get和post：
-get在浏览器网址处输入即可，参数在url上面。
-post需要form表单，参数在请求体的body上面。
-
-
-ajax中的get和post：
-get和post一样，参数的方式由服务段和客户端共同商定
-
-
-
-
-
-post会影响服务器文件，get不会。
-
-...
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-03-29
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2020/03/29/写在最前/">
-        <h2 class="post-title">
-            写在最前
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-写在最前
-一直以来只有写微信公众号时会拿起记事本来写东西，可惜已经好久没写了，这次打算开一个技术博客吧，也算记录自己的成长之路，也算当作自己的代码备忘。
-最近这段时间很迷茫，一直在考研和工作之间犹豫徘徊，不知道我能不能成为一名真正的程序员。
-很难得由这么空闲的时间，这么漫长的假期，我一边准备的考试，一边拓展的自己的能力库。也是最近学了git后才想把自己做的很久的梦完成。
-我很久之前看到过别......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-03-29
+        2020-03-26
     </p>
 
 </div>
@@ -476,10 +214,10 @@ post会影响服务器文件，get不会。
 
 <ul class="pager">
     
-    
-        <li class="next">
-            <a href="/page/2/">Older Posts &rarr;</a>
+        <li class="previous">
+            <a href="/">&larr; Newer Posts</a>
         </li>
+    
     
 </ul>
 

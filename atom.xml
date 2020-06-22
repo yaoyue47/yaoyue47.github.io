@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyue47.github.io/"/>
-  <updated>2020-06-06T13:47:45.066Z</updated>
+  <updated>2020-06-22T14:01:04.153Z</updated>
   <id>https://yaoyue47.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python的tips</title>
+    <link href="https://yaoyue47.github.io/2020/06/22/python%E7%9A%84tips/"/>
+    <id>https://yaoyue47.github.io/2020/06/22/python%E7%9A%84tips/</id>
+    <published>2020-06-22T13:48:20.000Z</published>
+    <updated>2020-06-22T14:01:04.153Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="替换讨厌的if-else结构"><a href="#替换讨厌的if-else结构" class="headerlink" title="替换讨厌的if/else结构"></a>替换讨厌的if/else结构</h1><p>使用字典结构替换if选择结构</p><p>举例说明：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_price_list</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> user_choice == <span class="string">'single'</span>:</span><br><span class="line">        print(<span class="number">150</span>)</span><br><span class="line">    <span class="keyword">elif</span> user_choice == <span class="string">'business'</span>:</span><br><span class="line">        print(<span class="number">300</span>)</span><br><span class="line">    <span class="keyword">elif</span> user_choice == <span class="string">'couple'</span>:</span><br><span class="line">        print(<span class="number">500</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"未找到你所需要的房间类型"</span>)</span><br><span class="line"></span><br><span class="line">show_price_list(<span class="string">'couple'</span>)</span><br></pre></td></tr></table></figure><p>使用以下方式替换它！</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PRICES = &#123;<span class="string">'single'</span>: <span class="number">150</span>, <span class="string">'business'</span>: <span class="number">300</span>, <span class="string">'couple'</span>: <span class="number">500</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_price_list</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    print(PRICES.get(user_choice, <span class="string">"未找到你所需要的房间类型"</span>)) <span class="comment"># 使用字典get方式</span></span><br><span class="line"></span><br><span class="line">show_price_list(<span class="string">'couple'</span>)</span><br></pre></td></tr></table></figure><p>执行不同的函数也可以：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'aaaa'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"bbbb"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drink</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"cccc"</span>)</span><br><span class="line">    </span><br><span class="line">choices = &#123;<span class="string">'work'</span>: work, <span class="string">'play'</span>: play, <span class="string">'drink'</span>: drink&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_do</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        choices.get(user_choice)() <span class="comment"># 使用字典直接获取函数名</span></span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        print(<span class="string">"你玩的太溜,我的字典里没有..."</span>)</span><br><span class="line"></span><br><span class="line">to_do(<span class="string">'dance'</span>)</span><br><span class="line">to_do(<span class="string">'drink'</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;替换讨厌的if-else结构&quot;&gt;&lt;a href=&quot;#替换讨厌的if-else结构&quot; class=&quot;headerlink&quot; title=&quot;替换讨厌的if/else结构&quot;&gt;&lt;/a&gt;替换讨厌的if/else结构&lt;/h1&gt;&lt;p&gt;使用字典结构替换if选择结构&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+    
+      <category term="python" scheme="https://yaoyue47.github.io/tags/python/"/>
+    
+  </entry>
   
   <entry>
     <title>RESTful的api是什么意思？</title>

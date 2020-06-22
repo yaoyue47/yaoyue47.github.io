@@ -13,11 +13,11 @@
 
     <title>
         
-          Archives - undefined
+          python的tips - undefined
         
     </title>
 
-    <link rel="canonical" href="https://yaoyue47.github.io/archives/">
+    <link rel="canonical" href="https://yaoyue47.github.io/2020/06/22/python的tips/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -151,214 +151,126 @@
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/img/tag-bg.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://yaoyue47.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Archives</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Hey, this is Archives.</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                    <h1>python的tips</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by 姚越 on
+                        2020-06-22
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <!-- 归档列表 -->
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-            
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-             <!-- 归档列表 -->
+                <h1 id="替换讨厌的if-else结构"><a href="#替换讨厌的if-else结构" class="headerlink" title="替换讨厌的if/else结构"></a>替换讨厌的if/else结构</h1><p>使用字典结构替换if选择结构</p>
+<p>举例说明：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_price_list</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> user_choice == <span class="string">'single'</span>:</span><br><span class="line">        print(<span class="number">150</span>)</span><br><span class="line">    <span class="keyword">elif</span> user_choice == <span class="string">'business'</span>:</span><br><span class="line">        print(<span class="number">300</span>)</span><br><span class="line">    <span class="keyword">elif</span> user_choice == <span class="string">'couple'</span>:</span><br><span class="line">        print(<span class="number">500</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        print(<span class="string">"未找到你所需要的房间类型"</span>)</span><br><span class="line"></span><br><span class="line">show_price_list(<span class="string">'couple'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>使用以下方式替换它！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PRICES = &#123;<span class="string">'single'</span>: <span class="number">150</span>, <span class="string">'business'</span>: <span class="number">300</span>, <span class="string">'couple'</span>: <span class="number">500</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">show_price_list</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    print(PRICES.get(user_choice, <span class="string">"未找到你所需要的房间类型"</span>)) <span class="comment"># 使用字典get方式</span></span><br><span class="line"></span><br><span class="line">show_price_list(<span class="string">'couple'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>执行不同的函数也可以：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">work</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">'aaaa'</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">play</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"bbbb"</span>)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drink</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"cccc"</span>)</span><br><span class="line">    </span><br><span class="line">choices = &#123;<span class="string">'work'</span>: work, <span class="string">'play'</span>: play, <span class="string">'drink'</span>: drink&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to_do</span><span class="params">(user_choice)</span>:</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        choices.get(user_choice)() <span class="comment"># 使用字典直接获取函数名</span></span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        print(<span class="string">"你玩的太溜,我的字典里没有..."</span>)</span><br><span class="line"></span><br><span class="line">to_do(<span class="string">'dance'</span>)</span><br><span class="line">to_do(<span class="string">'drink'</span>)</span><br></pre></td></tr></table></figure>
 
 
 
-            
-            <div class="one-tag-list">
-                <span class="fa fa-calendar-times-o listing-seperator" id="2020">
-                    <span class="tag-text">2020</span>
-                </span>
-                <ul>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    06-22
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/06/22/python的tips/" style="color: #0085a1">
-                        <span>
-                            python的tips
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    06-06
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/06/06/RESTful的api是什么意思？/" style="color: #0085a1">
-                        <span>
-                            RESTful的api是什么意思？
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    05-27
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/05/27/学习django的第四天/" style="color: #0085a1">
-                        <span>
-                            学习django的第四天
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-17
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/04/17/学习django第三天/" style="color: #0085a1">
-                        <span>
-                            学习django第三天
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-11
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/04/11/git全攻略/" style="color: #0085a1">
-                        <span>
-                            git全攻略
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-11
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/04/11/学习django第二天/" style="color: #0085a1">
-                        <span>
-                            学习django第二天
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    04-07
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/04/07/学习django第一天/" style="color: #0085a1">
-                        <span>
-                            学习django第一天
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-29
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/03/29/各种ajax的请求姿势/" style="color: #0085a1">
-                        <span>
-                            各种ajax的请求姿势
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-29
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/03/29/post和get的区别/" style="color: #0085a1">
-                        <span>
-                            post和get的区别
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-29
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/03/29/写在最前/" style="color: #0085a1">
-                        <span>
-                            写在最前
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
-                
-                  <!-- <li class="listing-item">
-                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
-                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
-                  </li> -->
-                 <li >
-                    03-26
-                    <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2020/03/26/hello-world/" style="color: #0085a1">
-                        <span>
-                            Hello World
-                        </span>
-                    </a>
-                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
-                </li>
+                <hr>
+
                 
 
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2020/06/06/RESTful的api是什么意思？/" data-toggle="tooltip" data-placement="top" title="RESTful的api是什么意思？">Next Post &rarr;</a>
+                        </li>
+                    
                 </ul>
-            </div>
-            
 
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#python" title="python">python</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="https://github.com/yaoyue47" target="_blank">Github</a></li>
+                    
+                </ul>
+                
+            </div>
 
         </div>
     </div>
-</div>
+</article>
+
+
+
+
+
+
+
 
 
     <!-- Footer -->

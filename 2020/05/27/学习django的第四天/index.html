@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/tags/">Tags</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/tags/">Tags</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -201,6 +201,42 @@
 <p>配置后在需要使用时执行以下函数即可：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.mail <span class="keyword">import</span> send_mail</span><br><span class="line"></span><br><span class="line">send_mail(</span><br><span class="line">       <span class="string">'subject'</span>,  <span class="comment"># 主题</span></span><br><span class="line">       <span class="string">'context'</span>,  <span class="comment"># 内容</span></span><br><span class="line">       <span class="string">'2359240697@qq.com'</span>,  <span class="comment">#邮件的发送方，需要和settings.py中设置的一样才行</span></span><br><span class="line">       [<span class="string">'xxx@qq.com'</span>],   <span class="comment"># 发送对方的邮件地址，需要是列表格式</span></span><br><span class="line">   )</span><br></pre></td></tr></table></figure>
 
+
+
+<h1 id="在django中使用redis"><a href="#在django中使用redis" class="headerlink" title="在django中使用redis"></a>在django中使用redis</h1><ul>
+<li>方式一，依赖于<code>pip3 install redis</code>，适用其他web框架</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"><span class="comment"># 抽取封装成模块，全局使用（单例模式，redis_pool.py）</span></span><br><span class="line">POOL = redis.ConnectionPool(host=<span class="string">'xx.xx.xx.xx'</span>, port=<span class="number">6379</span>, password=<span class="string">'xxx'</span>, max_connections=<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引用全局连接池</span></span><br><span class="line"><span class="keyword">from</span> redis_pool <span class="keyword">import</span> POOL</span><br><span class="line"></span><br><span class="line">conn = redis.Redis(connection_pool=POOL)</span><br><span class="line">conn.set(key, value)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>方式二，依赖于<code>pip3 install django-redis</code>，适用于django框架</li>
+</ul>
+<p><code>settings.py</code>中配置</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">"default"</span>: &#123;</span><br><span class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</span><br><span class="line">        <span class="string">"LOCATION"</span>: <span class="string">"redis://127.0.0.1:6379"</span>,</span><br><span class="line">        <span class="string">"OPTIONS"</span>: &#123;</span><br><span class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</span><br><span class="line">            <span class="string">"CONNECTION_POOL_KWARGS"</span>: &#123;<span class="string">"max_connections"</span>: <span class="number">100</span>&#125;</span><br><span class="line">            <span class="string">"DECODE_RESPONSES"</span>:<span class="literal">True</span></span><br><span class="line">            <span class="comment"># "PASSWORD": "密码",</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视图中使用</span></span><br><span class="line"><span class="keyword">from</span> django_redis <span class="keyword">import</span> get_redis_connection</span><br><span class="line">conn = get_redis_connection(<span class="string">"default"</span>)</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://www.jianshu.com/p/d017441f4fc9" target="_blank" rel="noopener">https://www.jianshu.com/p/d017441f4fc9</a></p>
+<h1 id="django中使用redis作为缓存"><a href="#django中使用redis作为缓存" class="headerlink" title="django中使用redis作为缓存"></a>django中使用redis作为缓存</h1><ul>
+<li>全站缓存，在<code>settings.py</code>中配置中间件，将下方写入第一条和最后一条。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'django.middleware.cache.UpdateCacheMiddleware'</span>,</span><br><span class="line"><span class="comment"># 其他中间件...</span></span><br><span class="line"><span class="string">'django.middleware.cache.FetchFromCacheMiddleware'</span>,</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定页面缓存</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.views.decorators.cache <span class="keyword">import</span> cache_page</span><br><span class="line"><span class="comment"># 方法I</span></span><br><span class="line"><span class="meta">@cache_page(60 * 15)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">my_view</span><span class="params">(request)</span>:</span></span><br><span class="line">   ...</span><br><span class="line"><span class="comment"># 方法II</span></span><br><span class="line">urlpatterns = [url(<span class="string">r'^foo/([0-9]&#123;1,2&#125;)/$'</span>, cache_page(<span class="number">60</span> * <span class="number">15</span>)(my_view)),]</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>指定模板部分缓存</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">步骤I. 引入TemplateTag</span><br><span class="line">        &#123;% load cache %&#125;</span><br><span class="line">步骤II. 使用缓存</span><br><span class="line">        &#123;% cache 5000 缓存key %&#125;</span><br><span class="line">            缓存内容</span><br><span class="line">        &#123;% endcache %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原文链接：<a href="https://www.jianshu.com/p/d017441f4fc9" target="_blank" rel="noopener">https://www.jianshu.com/p/d017441f4fc9</a></p>
 
 
                 <hr>

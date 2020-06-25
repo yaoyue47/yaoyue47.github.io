@@ -94,7 +94,7 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
@@ -108,7 +108,7 @@
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -206,6 +206,9 @@
 <h1 id="在django中使用redis"><a href="#在django中使用redis" class="headerlink" title="在django中使用redis"></a>在django中使用redis</h1><ul>
 <li>方式一，依赖于<code>pip3 install redis</code>，适用其他web框架</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis <span class="comment"># 正常不使用连接池的方式</span></span><br><span class="line"></span><br><span class="line">r = redis.Redis(host=<span class="string">'127.0.0.1'</span>, port=<span class="number">6379</span>, decode_responses=<span class="literal">True</span>)</span><br><span class="line">r.set(<span class="string">'skey'</span>, <span class="string">'svalue'</span>)</span><br><span class="line">print(r[<span class="string">'skey'</span>])</span><br><span class="line">print(r.get(<span class="string">'skey'</span>))</span><br><span class="line">print(type(r.get(<span class="string">'skey'</span>)))</span><br></pre></td></tr></table></figure>
+
+<hr>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"><span class="comment"># 抽取封装成模块，全局使用（单例模式，redis_pool.py）</span></span><br><span class="line">POOL = redis.ConnectionPool(host=<span class="string">'xx.xx.xx.xx'</span>, port=<span class="number">6379</span>, password=<span class="string">'xxx'</span>, max_connections=<span class="number">1000</span>)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 引用全局连接池</span></span><br><span class="line"><span class="keyword">from</span> redis_pool <span class="keyword">import</span> POOL</span><br><span class="line"></span><br><span class="line">conn = redis.Redis(connection_pool=POOL)</span><br><span class="line">conn.set(key, value)</span><br></pre></td></tr></table></figure>
@@ -216,12 +219,18 @@
 <li>方式二，依赖于<code>pip3 install django-redis</code>，适用于django框架</li>
 </ul>
 <p><code>settings.py</code>中配置</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">"default"</span>: &#123;</span><br><span class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</span><br><span class="line">        <span class="string">"LOCATION"</span>: <span class="string">"redis://127.0.0.1:6379"</span>,</span><br><span class="line">        <span class="string">"OPTIONS"</span>: &#123;</span><br><span class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</span><br><span class="line">            <span class="string">"CONNECTION_POOL_KWARGS"</span>: &#123;<span class="string">"max_connections"</span>: <span class="number">100</span>&#125;</span><br><span class="line">            <span class="string">"DECODE_RESPONSES"</span>:<span class="literal">True</span></span><br><span class="line">            <span class="comment"># "PASSWORD": "密码",</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">CACHES = &#123;</span><br><span class="line">    <span class="string">"default"</span>: &#123;</span><br><span class="line">        <span class="string">"BACKEND"</span>: <span class="string">"django_redis.cache.RedisCache"</span>,</span><br><span class="line">        <span class="string">"LOCATION"</span>: <span class="string">"redis://127.0.0.1:6379"</span>,</span><br><span class="line">        <span class="string">"OPTIONS"</span>: &#123;</span><br><span class="line">            <span class="string">"CLIENT_CLASS"</span>: <span class="string">"django_redis.client.DefaultClient"</span>,</span><br><span class="line">            <span class="string">"CONNECTION_POOL_KWARGS"</span>: &#123;<span class="string">"max_connections"</span>: <span class="number">100</span>&#125;,</span><br><span class="line">            <span class="string">"DECODE_RESPONSES"</span>:<span class="literal">True</span>, <span class="comment"># 写入为字符串类型</span></span><br><span class="line">            <span class="string">"PASSWORD"</span>: <span class="string">"密码"</span>,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视图中使用</span></span><br><span class="line"><span class="keyword">from</span> django_redis <span class="keyword">import</span> get_redis_connection</span><br><span class="line">conn = get_redis_connection(<span class="string">"default"</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 视图中使用</span></span><br><span class="line"><span class="keyword">from</span> django_redis <span class="keyword">import</span> get_redis_connection</span><br><span class="line">conn = get_redis_connection(<span class="string">"default"</span>) <span class="comment"># 这里的default是settings.py中的CACHES里的default</span></span><br></pre></td></tr></table></figure>
 
-<p>原文链接：<a href="https://www.jianshu.com/p/d017441f4fc9" target="_blank" rel="noopener">https://www.jianshu.com/p/d017441f4fc9</a></p>
-<h1 id="django中使用redis作为缓存"><a href="#django中使用redis作为缓存" class="headerlink" title="django中使用redis作为缓存"></a>django中使用redis作为缓存</h1><ul>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.core.cache <span class="keyword">import</span> cache</span><br><span class="line">cache.set(key, value)</span><br><span class="line"><span class="comment"># 另一种方式，可能有坑</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>原文链接：<a href="https://juejin.im/post/5d0b4488e51d45108126d257" target="_blank" rel="noopener">https://juejin.im/post/5d0b4488e51d45108126d257</a></p>
+<h1 id="django中使用redis作为缓存"><a href="#django中使用redis作为缓存" class="headerlink" title="django中使用redis作为缓存"></a>django中使用redis作为缓存</h1><p>需要完成上面的<code>settings.py</code>的配置后:</p>
+<ul>
 <li>全站缓存，在<code>settings.py</code>中配置中间件，将下方写入第一条和最后一条。</li>
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'django.middleware.cache.UpdateCacheMiddleware'</span>,</span><br><span class="line"><span class="comment"># 其他中间件...</span></span><br><span class="line"><span class="string">'django.middleware.cache.FetchFromCacheMiddleware'</span>,</span><br></pre></td></tr></table></figure>

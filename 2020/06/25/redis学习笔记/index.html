@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - undefined
+          redis学习笔记 - undefined
         
     </title>
 
-    <link rel="canonical" href="https://yaoyue47.github.io/2020/03/26/hello-world/">
+    <link rel="canonical" href="https://yaoyue47.github.io/2020/06/25/redis学习笔记/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -169,12 +169,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#redis" title="redis">redis</a>
+                        
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>redis学习笔记</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 姚越 on
-                        2020-03-26
+                        2020-06-25
                     </span>
                 </div>
             </div>
@@ -193,19 +195,36 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><ol>
+<li><p>安装redis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install redis -y</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动redis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置开机自启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>检查端口是否开启（防火墙或者<strong>云服务器的安全组</strong>）</p>
+</li>
+<li><p>设置redis可以远程访问</p>
+<p>编辑<code>/etc/redis.conf</code>文件</p>
+<ul>
+<li><p>注释掉 <code>bind 127.0.0.1</code></p>
+</li>
+<li><p>设置密码<code>requirepass yourpassword</code></p>
+</li>
+</ul>
+</li>
+<li><p>重启redis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进入redis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 127.0.0.1 -p 6379 -a password</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+</li>
+</ol>
+<p><strong>完成</strong></p>
 
 
                 <hr>
@@ -214,10 +233,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/03/29/写在最前/" data-toggle="tooltip" data-placement="top" title="写在最前">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2020/06/22/python的tips/" data-toggle="tooltip" data-placement="top" title="python的tips">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -243,6 +262,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#redis" title="redis">redis</a>
+                        
                     </div>
                 </section>
                 

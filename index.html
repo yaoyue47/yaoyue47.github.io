@@ -94,6 +94,13 @@
 
                         
                         <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
                             <a href="/tags/">Tags</a>
                         </li>
                         
@@ -102,13 +109,6 @@
                         
                         <li>
                             <a href="/about/">about</a>
-                        </li>
-                        
-                    
-
-                        
-                        <li>
-                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -185,6 +185,44 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2020/06/25/redis学习笔记/">
+        <h2 class="post-title">
+            redis学习笔记
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            redis的安装
+安装redis
+1yum install redis -y
+
+启动redis
+1systemctl start redis
+
+设置开机自启
+1systemctl enable redis
+
+检查端口是否开启（防火墙或者云服务器的安全组）
+
+设置redis可以远程访问
+编辑/etc/redis.conf文件
+
+注释掉 bind 127.0.0.1
+
+设置密码requirepa......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 姚越 on
+        2020-06-25
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -444,32 +482,6 @@ post会影响服务器文件，get不会。
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2020/03/29/写在最前/">
-        <h2 class="post-title">
-            写在最前
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-写在最前
-一直以来只有写微信公众号时会拿起记事本来写东西，可惜已经好久没写了，这次打算开一个技术博客吧，也算记录自己的成长之路，也算当作自己的代码备忘。
-最近这段时间很迷茫，一直在考研和工作之间犹豫徘徊，不知道我能不能成为一名真正的程序员。
-很难得由这么空闲的时间，这么漫长的假期，我一边准备的考试，一边拓展的自己的能力库。也是最近学了git后才想把自己做的很久的梦完成。
-我很久之前看到过别......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-03-29
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -513,11 +525,15 @@ post会影响服务器文件，get不会。
                             
                         
                             
-                            <a href="/tags/#python" title="python" rel="1">python</a>
+                            <a href="/tags/#redis" title="redis" rel="1">redis</a>
                             
                         
                             
                             <a href="/tags/#git" title="git" rel="1">git</a>
+                            
+                        
+                            
+                            <a href="/tags/#python" title="python" rel="1">python</a>
                             
                         
                             

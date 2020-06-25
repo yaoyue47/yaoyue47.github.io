@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yaoyue47.github.io/"/>
-  <updated>2020-06-22T14:01:04.153Z</updated>
+  <updated>2020-06-25T09:12:56.240Z</updated>
   <id>https://yaoyue47.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>redis学习笔记</title>
+    <link href="https://yaoyue47.github.io/2020/06/25/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    <id>https://yaoyue47.github.io/2020/06/25/redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+    <published>2020-06-25T09:04:31.000Z</published>
+    <updated>2020-06-25T09:12:56.240Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="redis的安装"><a href="#redis的安装" class="headerlink" title="redis的安装"></a>redis的安装</h1><ol><li><p>安装redis</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install redis -y</span><br></pre></td></tr></table></figure></li><li><p>启动redis</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start redis</span><br></pre></td></tr></table></figure></li><li><p>设置开机自启</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable redis</span><br></pre></td></tr></table></figure></li><li><p>检查端口是否开启（防火墙或者<strong>云服务器的安全组</strong>）</p></li><li><p>设置redis可以远程访问</p><p>编辑<code>/etc/redis.conf</code>文件</p><ul><li><p>注释掉 <code>bind 127.0.0.1</code></p></li><li><p>设置密码<code>requirepass yourpassword</code></p></li></ul></li><li><p>重启redis</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart redis</span><br></pre></td></tr></table></figure></li><li><p>进入redis</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -h 127.0.0.1 -p 6379 -a password</span><br></pre></td></tr></table></figure></li></ol><p><strong>完成</strong></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;redis的安装&quot;&gt;&lt;a href=&quot;#redis的安装&quot; class=&quot;headerlink&quot; title=&quot;redis的安装&quot;&gt;&lt;/a&gt;redis的安装&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;安装redis&lt;/p&gt;
+&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="redis" scheme="https://yaoyue47.github.io/tags/redis/"/>
+    
+  </entry>
   
   <entry>
     <title>python的tips</title>

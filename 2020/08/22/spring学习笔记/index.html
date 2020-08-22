@@ -13,11 +13,11 @@
 
     <title>
         
-          Hello World - undefined
+          spring学习笔记 - undefined
         
     </title>
 
-    <link rel="canonical" href="https://yaoyue47.github.io/2020/03/26/hello-world/">
+    <link rel="canonical" href="https://yaoyue47.github.io/2020/08/22/spring学习笔记/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -169,12 +169,14 @@
                 <div class="post-heading">
                     <div class="tags">
                         
+                          <a class="tag" href="/tags/#spring" title="spring">spring</a>
+                        
                     </div>
-                    <h1>Hello World</h1>
+                    <h1>spring学习笔记</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by 姚越 on
-                        2020-03-26
+                        2020-08-22
                     </span>
                 </div>
             </div>
@@ -193,19 +195,23 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+                <h1 id="spring学习笔记"><a href="#spring学习笔记" class="headerlink" title="spring学习笔记"></a>spring学习笔记</h1><h3 id="ioc-控制反转"><a href="#ioc-控制反转" class="headerlink" title="ioc 控制反转"></a>ioc 控制反转</h3><p>传统的业务执行的时候会这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BookService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> HikariConfig config = <span class="keyword">new</span> HikariConfig(); </span><br><span class="line">    <span class="keyword">private</span> DataSource dataSource = <span class="keyword">new</span> HikariDataSource(config);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Book <span class="title">getBook</span><span class="params">(<span class="keyword">long</span> bookId)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> (Connection conn = dataSource.getConnection()) &#123;</span><br><span class="line">            ...</span><br><span class="line">            <span class="keyword">return</span> book;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<p>每次调用需要实例化其他的类，如果业务组件多了的化会组件之间耦合度很高，所以引入控制反转的概念</p>
+<p>将所有的组件所需的实例都交由spring容器管理，每次需要实例的时候由spring统一的注入，这里的注入可以以xml配置文件的形式，可以以注解的形式，也可以以java文件的形式。</p>
+<hr>
+<h3 id="aop切面编程"><a href="#aop切面编程" class="headerlink" title="aop切面编程"></a>aop切面编程</h3><p>本质上是在一个完整的业务流程中就某一点，比如create操作作为切点，在create操作前和操作后做点什么。</p>
+<p>实质为动态代理</p>
+<hr>
+<h3 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h3><p>分为编程式事务和声明式事务</p>
+<ul>
+<li><p>编程式事务：比如下面这种使用try。。。catch。。。来实现的方式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">TransactionStatus tx = <span class="keyword">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 开启事务:</span></span><br><span class="line">    tx = txManager.getTransaction(<span class="keyword">new</span> DefaultTransactionDefinition());</span><br><span class="line">    <span class="comment">// 相关JDBC操作:</span></span><br><span class="line">    jdbcTemplate.update(<span class="string">"..."</span>);</span><br><span class="line">    jdbcTemplate.update(<span class="string">"..."</span>);</span><br><span class="line">    <span class="comment">// 提交事务:</span></span><br><span class="line">    txManager.commit(tx);</span><br><span class="line">&#125; <span class="keyword">catch</span> (RuntimeException e) &#123;</span><br><span class="line">    <span class="comment">// 回滚事务:</span></span><br><span class="line">    txManager.rollback(tx);</span><br><span class="line">    <span class="keyword">throw</span> e;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>声明式的事务：spring使用aop的方式来实现，我们只需使用注解方式即可</p>
+</li>
+</ul>
 
 
                 <hr>
@@ -214,10 +220,10 @@
 
                 <ul class="pager">
                     
-                        <li class="previous">
-                            <a href="/2020/03/29/写在最前/" data-toggle="tooltip" data-placement="top" title="写在最前">&larr; Previous Post</a>
-                        </li>
                     
+                        <li class="next">
+                            <a href="/2020/06/25/redis学习笔记/" data-toggle="tooltip" data-placement="top" title="redis学习笔记">Next Post &rarr;</a>
+                        </li>
                     
                 </ul>
 
@@ -243,6 +249,8 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
+                          <a class="tag" href="/tags/#spring" title="spring">spring</a>
+                        
                     </div>
                 </section>
                 

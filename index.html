@@ -94,14 +94,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">about</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">about</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -185,6 +185,35 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2020/08/24/设计模式那点事/">
+        <h2 class="post-title">
+            设计模式那点事
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            工厂模式（创建型）意思：我要一个东西，不需要自己去实例化，告诉工厂这个东西的名字就可以返回这个实例
+用途：作为一种创建类模式，在任何需要生成复杂对象的地方，都可以使用工厂方法模式
+代码：
+
+创建一个接口
+123public interface Shape&#123;    void draw();&#125;
+
+写3个类继承这个接口
+12345678910111213141516171819......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by 姚越 on
+        2020-08-24
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -441,31 +470,6 @@ MTV（即django所用设计模式）模型(Model)：
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2020/03/29/各种ajax的请求姿势/">
-        <h2 class="post-title">
-            各种ajax的请求姿势
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            
-关于各种ajax发送post，get请求的姿势
-
-jQuery封装的请求
-1234567$.post("/try/ajax/demo_test_post.php",&#123;			name:"菜鸟教程",			url:"http://www.runoob.com"		&#125;,		function(data,status)&#123;			alert("数据: \n" + data ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by 姚越 on
-        2020-03-29
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -526,6 +530,10 @@ jQuery封装的请求
                         
                             
                             <a href="/tags/#django" title="django" rel="4">django</a>
+                            
+                        
+                            
+                            <a href="/tags/#设计模式" title="设计模式" rel="1">设计模式</a>
                             
                         
                     </div>
